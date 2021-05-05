@@ -2165,7 +2165,7 @@ public abstract class AbstractPropertyAccessorTests {
 		}
 
 		@Override
-		public Set<Map.Entry<K, V>> entrySet() {
+		public Set<Entry<K, V>> entrySet() {
 			this.accessed = true;
 			return super.entrySet();
 		}

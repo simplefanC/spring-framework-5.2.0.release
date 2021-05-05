@@ -41,7 +41,7 @@ import org.springframework.lang.Nullable;
  * @since 16.02.2004
  * @see #setSystemTreePath
  * @see #setUserTreePath
- * @see java.util.prefs.Preferences
+ * @see Preferences
  * @deprecated as of 5.2, along with {@link PropertyPlaceholderConfigurer}
  */
 @Deprecated

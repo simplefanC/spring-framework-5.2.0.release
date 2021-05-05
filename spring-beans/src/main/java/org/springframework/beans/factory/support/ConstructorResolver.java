@@ -131,33 +131,44 @@ class ConstructorResolver {
 		Constructor<?> constructorToUse = null;
 		ArgumentsHolder argsHolderToUse = null;
 		Object[] argsToUse = null;
-
+		// explicit通过getBean方法传入
+		// 如果getBean方法调用的时候指定方法参数，那么直接使用
 		if (explicitArgs != null) {
 			argsToUse = explicitArgs;
 		}
 		else {
+			// 如果在getBean方法时候没有指定则尝试从配置文件中解析
 			Object[] argsToResolve = null;
+			// 尝试从缓存中获取获取参数
 			synchronized (mbd.constructorArgumentLock) {
 				constructorToUse = (Constructor<?>) mbd.resolvedConstructorOrFactoryMethod;
 				if (constructorToUse != null && mbd.constructorArgumentsResolved) {
 					// Found a cached constructor...
+					// 缓存中的构造参数
 					argsToUse = mbd.resolvedConstructorArguments;
 					if (argsToUse == null) {
 						argsToResolve = mbd.preparedConstructorArguments;
 					}
 				}
 			}
+			// 如果缓存中存在
 			if (argsToResolve != null) {
+				// 解析参数类型，如给定方法的构造函数A(int,int)则通过此方法后就会
+				// 把配置中("1","1")转换为(1,1)
+				// 缓存中的值可能是原始值也可能是最终值，在这里做处理
 				argsToUse = resolvePreparedArguments(beanName, mbd, bw, constructorToUse, argsToResolve, true);
 			}
 		}
-
+		// 没有缓存也没有明确指定
 		if (constructorToUse == null || argsToUse == null) {
 			// Take specified constructors, if any.
 			Constructor<?>[] candidates = chosenCtors;
+			// 如果参数中没有指定构造函数
 			if (candidates == null) {
+				// 获取当前bean对应的class对象
 				Class<?> beanClass = mbd.getBeanClass();
 				try {
+					// 获取所有的构造函数
 					candidates = (mbd.isNonPublicAccessAllowed() ?
 							beanClass.getDeclaredConstructors() : beanClass.getConstructors());
 				}
@@ -167,15 +178,17 @@ class ConstructorResolver {
 							"] from ClassLoader [" + beanClass.getClassLoader() + "] failed", ex);
 				}
 			}
-
+			// 如果只有默认构造函数并且配置文件中也没有参数配置
 			if (candidates.length == 1 && explicitArgs == null && !mbd.hasConstructorArgumentValues()) {
 				Constructor<?> uniqueCandidate = candidates[0];
 				if (uniqueCandidate.getParameterCount() == 0) {
+					// 缓存构造函数
 					synchronized (mbd.constructorArgumentLock) {
 						mbd.resolvedConstructorOrFactoryMethod = uniqueCandidate;
 						mbd.constructorArgumentsResolved = true;
 						mbd.resolvedConstructorArguments = EMPTY_ARGS;
 					}
+					// 使用默认构造函数初始化对象
 					bw.setBeanInstance(instantiate(beanName, mbd, uniqueCandidate, EMPTY_ARGS));
 					return bw;
 				}
@@ -662,7 +675,7 @@ class ConstructorResolver {
 
 		int minNrOfArgs = cargs.getArgumentCount();
 
-		for (Map.Entry<Integer, ConstructorArgumentValues.ValueHolder> entry : cargs.getIndexedArgumentValues().entrySet()) {
+		for (Map.Entry<Integer, ValueHolder> entry : cargs.getIndexedArgumentValues().entrySet()) {
 			int index = entry.getKey();
 			if (index < 0) {
 				throw new BeanCreationException(mbd.getResourceDescription(), beanName,
@@ -671,28 +684,28 @@ class ConstructorResolver {
 			if (index > minNrOfArgs) {
 				minNrOfArgs = index + 1;
 			}
-			ConstructorArgumentValues.ValueHolder valueHolder = entry.getValue();
+			ValueHolder valueHolder = entry.getValue();
 			if (valueHolder.isConverted()) {
 				resolvedValues.addIndexedArgumentValue(index, valueHolder);
 			}
 			else {
 				Object resolvedValue =
 						valueResolver.resolveValueIfNecessary("constructor argument", valueHolder.getValue());
-				ConstructorArgumentValues.ValueHolder resolvedValueHolder =
-						new ConstructorArgumentValues.ValueHolder(resolvedValue, valueHolder.getType(), valueHolder.getName());
+				ValueHolder resolvedValueHolder =
+						new ValueHolder(resolvedValue, valueHolder.getType(), valueHolder.getName());
 				resolvedValueHolder.setSource(valueHolder);
 				resolvedValues.addIndexedArgumentValue(index, resolvedValueHolder);
 			}
 		}
 
-		for (ConstructorArgumentValues.ValueHolder valueHolder : cargs.getGenericArgumentValues()) {
+		for (ValueHolder valueHolder : cargs.getGenericArgumentValues()) {
 			if (valueHolder.isConverted()) {
 				resolvedValues.addGenericArgumentValue(valueHolder);
 			}
 			else {
 				Object resolvedValue =
 						valueResolver.resolveValueIfNecessary("constructor argument", valueHolder.getValue());
-				ConstructorArgumentValues.ValueHolder resolvedValueHolder = new ConstructorArgumentValues.ValueHolder(
+				ValueHolder resolvedValueHolder = new ValueHolder(
 						resolvedValue, valueHolder.getType(), valueHolder.getName());
 				resolvedValueHolder.setSource(valueHolder);
 				resolvedValues.addGenericArgumentValue(resolvedValueHolder);
@@ -715,14 +728,14 @@ class ConstructorResolver {
 		TypeConverter converter = (customConverter != null ? customConverter : bw);
 
 		ArgumentsHolder args = new ArgumentsHolder(paramTypes.length);
-		Set<ConstructorArgumentValues.ValueHolder> usedValueHolders = new HashSet<>(paramTypes.length);
+		Set<ValueHolder> usedValueHolders = new HashSet<>(paramTypes.length);
 		Set<String> autowiredBeanNames = new LinkedHashSet<>(4);
 
 		for (int paramIndex = 0; paramIndex < paramTypes.length; paramIndex++) {
 			Class<?> paramType = paramTypes[paramIndex];
 			String paramName = (paramNames != null ? paramNames[paramIndex] : "");
 			// Try to find matching constructor argument value, either indexed or generic.
-			ConstructorArgumentValues.ValueHolder valueHolder = null;
+			ValueHolder valueHolder = null;
 			if (resolvedValues != null) {
 				valueHolder = resolvedValues.getArgumentValue(paramIndex, paramType, paramName, usedValueHolders);
 				// If we couldn't find a direct match and are not supposed to autowire,
@@ -755,8 +768,8 @@ class ConstructorResolver {
 										"] to required type [" + paramType.getName() + "]: " + ex.getMessage());
 					}
 					Object sourceHolder = valueHolder.getSource();
-					if (sourceHolder instanceof ConstructorArgumentValues.ValueHolder) {
-						Object sourceValue = ((ConstructorArgumentValues.ValueHolder) sourceHolder).getValue();
+					if (sourceHolder instanceof ValueHolder) {
+						Object sourceValue = ((ValueHolder) sourceHolder).getValue();
 						args.resolveNecessary = true;
 						args.preparedArguments[paramIndex] = sourceValue;
 					}

@@ -339,7 +339,7 @@ public abstract class YamlProcessor {
 
 
 	/**
-	 * Status returned from {@link DocumentMatcher#matches(java.util.Properties)}.
+	 * Status returned from {@link DocumentMatcher#matches(Properties)}.
 	 */
 	public enum MatchStatus {
 

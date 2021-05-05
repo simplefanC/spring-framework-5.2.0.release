@@ -50,8 +50,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
- * Unit tests for {@link org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor}
- * processing the JSR-330 {@link javax.inject.Inject} annotation.
+ * Unit tests for {@link AutowiredAnnotationBeanPostProcessor}
+ * processing the JSR-330 {@link Inject} annotation.
  *
  * @author Juergen Hoeller
  * @since 3.0
@@ -459,8 +459,8 @@ public class InjectAnnotationBeanPostProcessorTests {
 	}
 
 	/**
-	 * Verifies that a dependency on a {@link org.springframework.beans.factory.FactoryBean}
-	 * can be autowired via {@link org.springframework.beans.factory.annotation.Autowired @Inject},
+	 * Verifies that a dependency on a {@link FactoryBean}
+	 * can be autowired via {@link Autowired @Inject},
 	 * specifically addressing SPR-4040.
 	 */
 	@Test
@@ -1119,7 +1119,7 @@ public class InjectAnnotationBeanPostProcessorTests {
 
 
 	/**
-	 * Bean with a dependency on a {@link org.springframework.beans.factory.FactoryBean}.
+	 * Bean with a dependency on a {@link FactoryBean}.
 	 */
 	private static class FactoryBeanDependentBean {
 

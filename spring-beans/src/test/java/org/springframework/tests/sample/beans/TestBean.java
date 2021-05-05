@@ -421,7 +421,7 @@ public class TestBean implements BeanNameAware, BeanFactoryAware, ITestBean, IOt
 
 
 	/**
-	 * @see org.springframework.tests.sample.beans.ITestBean#exceptional(Throwable)
+	 * @see ITestBean#exceptional(Throwable)
 	 */
 	@Override
 	public void exceptional(Throwable t) throws Throwable {
@@ -435,7 +435,7 @@ public class TestBean implements BeanNameAware, BeanFactoryAware, ITestBean, IOt
 		throw new IOException();
 	}
 	/**
-	 * @see org.springframework.tests.sample.beans.ITestBean#returnsThis()
+	 * @see ITestBean#returnsThis()
 	 */
 	@Override
 	public Object returnsThis() {
@@ -443,7 +443,7 @@ public class TestBean implements BeanNameAware, BeanFactoryAware, ITestBean, IOt
 	}
 
 	/**
-	 * @see org.springframework.tests.sample.beans.IOther#absquatulate()
+	 * @see IOther#absquatulate()
 	 */
 	@Override
 	public void absquatulate() {

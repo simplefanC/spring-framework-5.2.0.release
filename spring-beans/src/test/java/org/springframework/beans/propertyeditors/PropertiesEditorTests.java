@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Test the conversion of Strings to {@link java.util.Properties} objects,
+ * Test the conversion of Strings to {@link Properties} objects,
  * and other property editors.
  *
  * @author Rod Johnson

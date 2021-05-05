@@ -45,7 +45,7 @@ import org.springframework.core.io.Resource;
  * @author Juergen Hoeller
  * @author Chris Beams
  * @since 15 April 2001
- * @see org.springframework.beans.factory.support.DefaultListableBeanFactory
+ * @see DefaultListableBeanFactory
  * @see XmlBeanDefinitionReader
  * @deprecated as of Spring 3.1 in favor of {@link DefaultListableBeanFactory} and
  * {@link XmlBeanDefinitionReader}

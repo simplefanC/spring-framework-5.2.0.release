@@ -19,7 +19,7 @@ package org.springframework.tests.sample.beans;
 import java.io.IOException;
 
 /**
- * Interface used for {@link org.springframework.tests.sample.beans.TestBean}.
+ * Interface used for {@link TestBean}.
  *
  * <p>Two methods are the same as on Person, but if this
  * extends person it breaks quite a few tests..
