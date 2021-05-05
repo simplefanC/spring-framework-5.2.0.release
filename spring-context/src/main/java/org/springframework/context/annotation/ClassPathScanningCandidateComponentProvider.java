@@ -71,7 +71,7 @@ import org.springframework.util.ClassUtils;
  * classpath scanning is used instead.
  *
  * <p>This implementation is based on Spring's
- * {@link org.springframework.core.type.classreading.MetadataReader MetadataReader}
+ * {@link MetadataReader MetadataReader}
  * facility, backed by an ASM {@link org.springframework.asm.ClassReader ClassReader}.
  *
  * @author Mark Fisher
@@ -80,8 +80,8 @@ import org.springframework.util.ClassUtils;
  * @author Chris Beams
  * @author Stephane Nicoll
  * @since 2.5
- * @see org.springframework.core.type.classreading.MetadataReaderFactory
- * @see org.springframework.core.type.AnnotationMetadata
+ * @see MetadataReaderFactory
+ * @see AnnotationMetadata
  * @see ScannedGenericBeanDefinition
  * @see CandidateComponentsIndex
  */
@@ -257,8 +257,8 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 	 * This will typically be a {@link ResourcePatternResolver} implementation.
 	 * <p>Default is a {@code PathMatchingResourcePatternResolver}, also capable of
 	 * resource pattern resolving through the {@code ResourcePatternResolver} interface.
-	 * @see org.springframework.core.io.support.ResourcePatternResolver
-	 * @see org.springframework.core.io.support.PathMatchingResourcePatternResolver
+	 * @see ResourcePatternResolver
+	 * @see PathMatchingResourcePatternResolver
 	 */
 	@Override
 	public void setResourceLoader(@Nullable ResourceLoader resourceLoader) {

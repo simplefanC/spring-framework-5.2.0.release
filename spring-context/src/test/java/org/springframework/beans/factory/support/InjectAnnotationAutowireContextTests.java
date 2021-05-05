@@ -40,7 +40,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
- * Integration tests for handling JSR-303 {@link javax.inject.Qualifier} annotations.
+ * Integration tests for handling JSR-303 {@link Qualifier} annotations.
  *
  * @author Juergen Hoeller
  * @since 3.0

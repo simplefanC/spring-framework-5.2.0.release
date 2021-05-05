@@ -34,7 +34,7 @@ import org.springframework.util.Assert;
 
 /**
  * Provides supporting infrastructure for registering MBeans with an
- * {@link javax.management.MBeanServer}. The behavior when encountering
+ * {@link MBeanServer}. The behavior when encountering
  * an existing MBean at a given {@link ObjectName} is fully configurable
  * allowing for flexible registration settings.
  *
@@ -46,7 +46,7 @@ import org.springframework.util.Assert;
  * {@link #onUnregister(ObjectName)} methods respectively.
  *
  * <p>By default, the registration process will fail if attempting to
- * register an MBean using a {@link javax.management.ObjectName} that is
+ * register an MBean using a {@link ObjectName} that is
  * already used.
  *
  * <p>By setting the {@link #setRegistrationPolicy(RegistrationPolicy) registrationPolicy}
@@ -111,7 +111,7 @@ public class MBeanRegistrationSupport {
 
 	/**
 	 * The policy to use when attempting to register an MBean
-	 * under an {@link javax.management.ObjectName} that already exists.
+	 * under an {@link ObjectName} that already exists.
 	 * @param registrationPolicy the policy to use
 	 * @since 3.2
 	 */

@@ -196,7 +196,7 @@ public class BeanNameAutoProxyCreatorTests {
 class CreatesTestBean implements FactoryBean<Object> {
 
 	/**
-	 * @see org.springframework.beans.factory.FactoryBean#getObject()
+	 * @see FactoryBean#getObject()
 	 */
 	@Override
 	public Object getObject() throws Exception {
@@ -204,7 +204,7 @@ class CreatesTestBean implements FactoryBean<Object> {
 	}
 
 	/**
-	 * @see org.springframework.beans.factory.FactoryBean#getObjectType()
+	 * @see FactoryBean#getObjectType()
 	 */
 	@Override
 	public Class<?> getObjectType() {
@@ -212,7 +212,7 @@ class CreatesTestBean implements FactoryBean<Object> {
 	}
 
 	/**
-	 * @see org.springframework.beans.factory.FactoryBean#isSingleton()
+	 * @see FactoryBean#isSingleton()
 	 */
 	@Override
 	public boolean isSingleton() {

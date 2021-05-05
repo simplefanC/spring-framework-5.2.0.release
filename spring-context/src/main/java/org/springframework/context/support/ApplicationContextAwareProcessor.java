@@ -51,13 +51,13 @@ import org.springframework.util.StringValueResolver;
  * @author Costin Leau
  * @author Chris Beams
  * @since 10.10.2003
- * @see org.springframework.context.EnvironmentAware
- * @see org.springframework.context.EmbeddedValueResolverAware
- * @see org.springframework.context.ResourceLoaderAware
- * @see org.springframework.context.ApplicationEventPublisherAware
- * @see org.springframework.context.MessageSourceAware
- * @see org.springframework.context.ApplicationContextAware
- * @see org.springframework.context.support.AbstractApplicationContext#refresh()
+ * @see EnvironmentAware
+ * @see EmbeddedValueResolverAware
+ * @see ResourceLoaderAware
+ * @see ApplicationEventPublisherAware
+ * @see MessageSourceAware
+ * @see ApplicationContextAware
+ * @see AbstractApplicationContext#refresh()
  */
 class ApplicationContextAwareProcessor implements BeanPostProcessor {
 

@@ -27,7 +27,7 @@ import org.springframework.util.function.SingletonSupplier;
  * @author Stephane Nicoll
  * @author Juergen Hoeller
  * @since 4.1
- * @see org.springframework.cache.interceptor.CacheErrorHandler
+ * @see CacheErrorHandler
  */
 public abstract class AbstractCacheInvoker {
 

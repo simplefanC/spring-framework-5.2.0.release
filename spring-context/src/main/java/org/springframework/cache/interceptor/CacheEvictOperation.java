@@ -34,7 +34,7 @@ public class CacheEvictOperation extends CacheOperation {
 	 * Create a new {@link CacheEvictOperation} instance from the given builder.
 	 * @since 4.3
 	 */
-	public CacheEvictOperation(CacheEvictOperation.Builder b) {
+	public CacheEvictOperation(Builder b) {
 		super(b);
 		this.cacheWide = b.cacheWide;
 		this.beforeInvocation = b.beforeInvocation;

@@ -32,7 +32,7 @@ import java.util.EventListener;
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @param <E> the specific {@code ApplicationEvent} subclass to listen to
- * @see org.springframework.context.ApplicationEvent
+ * @see ApplicationEvent
  * @see org.springframework.context.event.ApplicationEventMulticaster
  * @see org.springframework.context.event.EventListener
  */

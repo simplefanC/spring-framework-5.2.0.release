@@ -88,7 +88,7 @@ public class StaticMessageSourceTests extends AbstractApplicationContextTests {
 	 * The underlying implementation uses a hashMap to cache messageFormats
 	 * once a message has been asked for.  This test is an attempt to
 	 * make sure the cache is being used properly.
-	 * @see org.springframework.context.support.AbstractMessageSource for more details.
+	 * @see AbstractMessageSource for more details.
 	 */
 	@Test
 	public void getMessageWithMessageAlreadyLookedFor() {

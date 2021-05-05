@@ -39,7 +39,7 @@ import org.springframework.remoting.support.RemoteInvocationFactory;
 import org.springframework.util.Assert;
 
 /**
- * {@link org.aopalliance.intercept.MethodInterceptor} for accessing RMI services
+ * {@link MethodInterceptor} for accessing RMI services
  * from JNDI. Typically used for RMI-IIOP but can also be used for EJB home objects
  * (for example, a Stateful Session Bean home). In contrast to a plain JNDI lookup,
  * this accessor also performs narrowing through PortableRemoteObject.
@@ -70,7 +70,7 @@ import org.springframework.util.Assert;
  * @see JndiRmiServiceExporter
  * @see JndiRmiProxyFactoryBean
  * @see org.springframework.remoting.RemoteAccessException
- * @see java.rmi.RemoteException
+ * @see RemoteException
  * @see java.rmi.Remote
  */
 public class JndiRmiClientInterceptor extends JndiObjectLocator implements MethodInterceptor, InitializingBean {
@@ -406,7 +406,7 @@ public class JndiRmiClientInterceptor extends JndiObjectLocator implements Metho
 	 * @throws NoSuchMethodException if the method name could not be resolved
 	 * @throws IllegalAccessException if the method could not be accessed
 	 * @throws InvocationTargetException if the method invocation resulted in an exception
-	 * @see org.springframework.remoting.support.RemoteInvocation
+	 * @see RemoteInvocation
 	 */
 	protected Object doInvoke(MethodInvocation methodInvocation, RmiInvocationHandler invocationHandler)
 			throws RemoteException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {

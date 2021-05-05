@@ -34,7 +34,7 @@ public class SomeCustomKeyGenerator implements KeyGenerator {
 	}
 
 	/**
-	 * @see #generate(Object, java.lang.reflect.Method, Object...)
+	 * @see #generate(Object, Method, Object...)
 	 */
 	static Object generateKey(String methodName, Object... params) {
 		final StringBuilder sb = new StringBuilder(methodName);

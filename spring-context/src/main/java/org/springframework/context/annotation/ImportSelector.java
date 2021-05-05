@@ -38,7 +38,7 @@ import org.springframework.core.type.AnnotationMetadata;
  * <ul>
  * <li>{@link org.springframework.core.env.Environment Environment}</li>
  * <li>{@link org.springframework.beans.factory.BeanFactory BeanFactory}</li>
- * <li>{@link java.lang.ClassLoader ClassLoader}</li>
+ * <li>{@link ClassLoader ClassLoader}</li>
  * <li>{@link org.springframework.core.io.ResourceLoader ResourceLoader}</li>
  * </ul>
  *

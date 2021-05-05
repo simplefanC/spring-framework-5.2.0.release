@@ -427,7 +427,7 @@ public class ImportSelectorTests {
 
 		@Nullable
 		@Override
-		public Class<? extends DeferredImportSelector.Group> getImportGroup() {
+		public Class<? extends Group> getImportGroup() {
 			return TestImportGroup.class;
 		}
 
@@ -448,7 +448,7 @@ public class ImportSelectorTests {
 
 		@Nullable
 		@Override
-		public Class<? extends DeferredImportSelector.Group> getImportGroup() {
+		public Class<? extends Group> getImportGroup() {
 			return TestImportGroup.class;
 		}
 
@@ -471,7 +471,7 @@ public class ImportSelectorTests {
 
 		@Nullable
 		@Override
-		public Class<? extends DeferredImportSelector.Group> getImportGroup() {
+		public Class<? extends Group> getImportGroup() {
 			return TestImportGroup.class;
 		}
 
@@ -493,7 +493,7 @@ public class ImportSelectorTests {
 
 		@Nullable
 		@Override
-		public Class<? extends DeferredImportSelector.Group> getImportGroup() {
+		public Class<? extends Group> getImportGroup() {
 			return TestImportGroup.class;
 		}
 

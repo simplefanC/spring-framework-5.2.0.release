@@ -49,8 +49,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * <li>{@link InitializingBean} &amp; {@link DisposableBean} interfaces</li>
  * <li>Custom {@link RootBeanDefinition#getInitMethodName() init} &amp;
  * {@link RootBeanDefinition#getDestroyMethodName() destroy} methods</li>
- * <li>JSR 250's {@link javax.annotation.PostConstruct @PostConstruct} &amp;
- * {@link javax.annotation.PreDestroy @PreDestroy} annotations</li>
+ * <li>JSR 250's {@link PostConstruct @PostConstruct} &amp;
+ * {@link PreDestroy @PreDestroy} annotations</li>
  * </ul>
  *
  * @author Sam Brannen

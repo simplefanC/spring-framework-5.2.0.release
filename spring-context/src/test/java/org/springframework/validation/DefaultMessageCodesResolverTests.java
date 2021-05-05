@@ -150,7 +150,7 @@ public class DefaultMessageCodesResolverTests {
 		resolver.setMessageCodeFormatter(new MessageCodeFormatter() {
 			@Override
 			public String format(String errorCode, String objectName, String field) {
-				return DefaultMessageCodesResolver.Format.toDelimitedString(
+				return Format.toDelimitedString(
 						"CUSTOM-" + errorCode, objectName, field);
 			}
 		});

@@ -22,12 +22,12 @@ import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
 /**
- * Helper class for the creation of {@link javax.management.ObjectName} instances.
+ * Helper class for the creation of {@link ObjectName} instances.
  *
  * @author Rob Harrop
  * @author Juergen Hoeller
  * @since 1.2
- * @see javax.management.ObjectName#getInstance(String)
+ * @see ObjectName#getInstance(String)
  */
 public final class ObjectNameManager {
 
@@ -91,8 +91,8 @@ public final class ObjectNameManager {
 	 * @param properties the properties for the {@code ObjectName}
 	 * @return the {@code ObjectName} instance
 	 * @throws MalformedObjectNameException in case of an invalid object name specification
-	 * @see ObjectName#ObjectName(String, java.util.Hashtable)
-	 * @see ObjectName#getInstance(String, java.util.Hashtable)
+	 * @see ObjectName#ObjectName(String, Hashtable)
+	 * @see ObjectName#getInstance(String, Hashtable)
 	 */
 	public static ObjectName getInstance(String domainName, Hashtable<String, String> properties)
 			throws MalformedObjectNameException {

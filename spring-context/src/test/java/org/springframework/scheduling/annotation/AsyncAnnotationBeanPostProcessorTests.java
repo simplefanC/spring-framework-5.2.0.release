@@ -123,7 +123,7 @@ public class AsyncAnnotationBeanPostProcessorTests {
 		context.registerBeanDefinition("myExecutor", executorDefinition);
 
 		BeanDefinition targetDefinition =
-				new RootBeanDefinition(AsyncAnnotationBeanPostProcessorTests.TestBean.class);
+				new RootBeanDefinition(TestBean.class);
 		context.registerBeanDefinition("target", targetDefinition);
 
 		context.refresh();
@@ -152,7 +152,7 @@ public class AsyncAnnotationBeanPostProcessorTests {
 		context.registerBeanDefinition("taskExecutor", executorDefinition2);
 
 		BeanDefinition targetDefinition =
-				new RootBeanDefinition(AsyncAnnotationBeanPostProcessorTests.TestBean.class);
+				new RootBeanDefinition(TestBean.class);
 		context.registerBeanDefinition("target", targetDefinition);
 
 		context.refresh();

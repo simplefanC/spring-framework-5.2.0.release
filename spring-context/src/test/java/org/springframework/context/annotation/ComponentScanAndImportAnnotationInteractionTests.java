@@ -86,7 +86,7 @@ public class ComponentScanAndImportAnnotationInteractionTests {
 	}
 
 
-	@Import(org.springframework.context.annotation.componentscan.simple.SimpleComponent.class)
+	@Import(SimpleComponent.class)
 	static final class Config2 {
 	}
 

@@ -743,7 +743,7 @@ class ConfigurationClassParser {
 		 * Handle the specified {@link DeferredImportSelector}. If deferred import
 		 * selectors are being collected, this registers this instance to the list. If
 		 * they are being processed, the {@link DeferredImportSelector} is also processed
-		 * immediately according to its {@link DeferredImportSelector.Group}.
+		 * immediately according to its {@link Group}.
 		 * @param configClass the source configuration class
 		 * @param importSelector the selector to handle
 		 */
@@ -853,7 +853,7 @@ class ConfigurationClassParser {
 
 	private static class DeferredImportSelectorGrouping {
 
-		private final DeferredImportSelector.Group group;
+		private final Group group;
 
 		private final List<DeferredImportSelectorHolder> deferredImports = new ArrayList<>();
 

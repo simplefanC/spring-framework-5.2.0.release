@@ -38,7 +38,7 @@ public class CacheableOperation extends CacheOperation {
 	 * Create a new {@link CacheableOperation} instance from the given builder.
 	 * @since 4.3
 	 */
-	public CacheableOperation(CacheableOperation.Builder b) {
+	public CacheableOperation(Builder b) {
 		super(b);
 		this.unless = b.unless;
 		this.sync = b.sync;

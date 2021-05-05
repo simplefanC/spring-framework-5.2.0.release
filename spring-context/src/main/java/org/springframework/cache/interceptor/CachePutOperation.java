@@ -36,7 +36,7 @@ public class CachePutOperation extends CacheOperation {
 	 * Create a new {@link CachePutOperation} instance from the given builder.
 	 * @since 4.3
 	 */
-	public CachePutOperation(CachePutOperation.Builder b) {
+	public CachePutOperation(Builder b) {
 		super(b);
 		this.unless = b.unless;
 	}

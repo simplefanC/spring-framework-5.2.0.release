@@ -27,7 +27,7 @@ import org.springframework.jmx.MBeanServerNotFoundException;
 import org.springframework.lang.Nullable;
 
 /**
- * {@link FactoryBean} that obtains a WebSphere {@link javax.management.MBeanServer}
+ * {@link FactoryBean} that obtains a WebSphere {@link MBeanServer}
  * reference through WebSphere's proprietary {@code AdminServiceFactory} API,
  * available on WebSphere 5.1 and higher.
  *
@@ -44,7 +44,7 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @author Rob Harrop
  * @since 2.0.3
- * @see javax.management.MBeanServer
+ * @see MBeanServer
  * @see MBeanServerFactoryBean
  */
 public class WebSphereMBeanServerFactoryBean implements FactoryBean<MBeanServer>, InitializingBean {

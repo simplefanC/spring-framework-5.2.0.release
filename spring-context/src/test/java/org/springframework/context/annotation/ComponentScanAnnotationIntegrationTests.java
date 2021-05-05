@@ -401,8 +401,8 @@ class ComponentScanWithCustomTypeFilter {
 		return cac;
 	}
 
-	public ComponentScanParserTests.KustomAnnotationAutowiredBean testBean() {
-		return new ComponentScanParserTests.KustomAnnotationAutowiredBean();
+	public KustomAnnotationAutowiredBean testBean() {
+		return new KustomAnnotationAutowiredBean();
 	}
 }
 
