@@ -108,7 +108,7 @@ public class App {
 
 ![](https://gitee.com/cf_9909/image_bed/raw/master/images/20210505154946.png)
 
-   首先找到这个类所在的项目（如InstrumentationSavingAgent类所在的项目为spring-instrument）；
+   首先找到这个类所在的项目（如InstrumentationSavingAgent类所在的项目为spring-context）；
    再看看out文件夹（idea默认编译文件为out）下面是不是有这个class
 
    解决：**可以运行这个项目下面的测试类test**让idea去帮我们编译这些java类
