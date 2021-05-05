@@ -156,7 +156,7 @@ public class MethodProxy {
 	}
 
 	/**
-	 * Return the {@link org.springframework.cglib.reflect.FastClass} method index
+	 * Return the {@link FastClass} method index
 	 * for the method used by {@link #invokeSuper}. This index uniquely
 	 * identifies the method within the generated proxy, and therefore
 	 * can be useful to reference external metadata.

@@ -49,7 +49,7 @@ import org.springframework.lang.Nullable;
  * class initialization.
  *
  * <p>If necessary, a {@code MergedAnnotation} can be {@linkplain #synthesize()
- * synthesized} back into an actual {@link java.lang.annotation.Annotation}.
+ * synthesized} back into an actual {@link Annotation}.
  *
  * @author Phillip Webb
  * @author Juergen Hoeller
@@ -123,7 +123,7 @@ public interface MergedAnnotation<A extends Annotation> {
 	/**
 	 * Get the source that ultimately declared the root annotation, or
 	 * {@code null} if the source is not known. If this merged annotation was
-	 * created {@link MergedAnnotations#from(java.lang.reflect.AnnotatedElement)
+	 * created {@link MergedAnnotations#from(AnnotatedElement)
 	 * from} an {@link AnnotatedElement} then this source will be an element of
 	 * the same type. If the annotation was loaded without using reflection, the
 	 * source can be of any type, but should have a sensible {@code toString()}.

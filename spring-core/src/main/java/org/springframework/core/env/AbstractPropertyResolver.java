@@ -90,7 +90,7 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 	/**
 	 * Set the prefix that placeholders replaced by this resolver must begin with.
 	 * <p>The default is "${".
-	 * @see org.springframework.util.SystemPropertyUtils#PLACEHOLDER_PREFIX
+	 * @see SystemPropertyUtils#PLACEHOLDER_PREFIX
 	 */
 	@Override
 	public void setPlaceholderPrefix(String placeholderPrefix) {
@@ -101,7 +101,7 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 	/**
 	 * Set the suffix that placeholders replaced by this resolver must end with.
 	 * <p>The default is "}".
-	 * @see org.springframework.util.SystemPropertyUtils#PLACEHOLDER_SUFFIX
+	 * @see SystemPropertyUtils#PLACEHOLDER_SUFFIX
 	 */
 	@Override
 	public void setPlaceholderSuffix(String placeholderSuffix) {
@@ -114,7 +114,7 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 	 * resolver and their associated default value, or {@code null} if no such
 	 * special character should be processed as a value separator.
 	 * <p>The default is ":".
-	 * @see org.springframework.util.SystemPropertyUtils#VALUE_SEPARATOR
+	 * @see SystemPropertyUtils#VALUE_SEPARATOR
 	 */
 	@Override
 	public void setValueSeparator(@Nullable String valueSeparator) {

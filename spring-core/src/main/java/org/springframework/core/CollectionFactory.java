@@ -113,11 +113,11 @@ public final class CollectionFactory {
 	 * @param capacity the initial capacity
 	 * @return a new, empty collection instance
 	 * @see #isApproximableCollectionType
-	 * @see java.util.LinkedList
-	 * @see java.util.ArrayList
-	 * @see java.util.EnumSet
-	 * @see java.util.TreeSet
-	 * @see java.util.LinkedHashSet
+	 * @see LinkedList
+	 * @see ArrayList
+	 * @see EnumSet
+	 * @see TreeSet
+	 * @see LinkedHashSet
 	 */
 	@SuppressWarnings({"rawtypes", "unchecked", "cast"})
 	public static <E> Collection<E> createApproximateCollection(@Nullable Object collection, int capacity) {
@@ -170,10 +170,10 @@ public final class CollectionFactory {
 	 * @param capacity the initial capacity
 	 * @return a new collection instance
 	 * @since 4.1.3
-	 * @see java.util.LinkedHashSet
-	 * @see java.util.ArrayList
-	 * @see java.util.TreeSet
-	 * @see java.util.EnumSet
+	 * @see LinkedHashSet
+	 * @see ArrayList
+	 * @see TreeSet
+	 * @see EnumSet
 	 * @throws IllegalArgumentException if the supplied {@code collectionType} is
 	 * {@code null}; or if the desired {@code collectionType} is {@link EnumSet} and
 	 * the supplied {@code elementType} is not a subtype of {@link Enum}
@@ -237,9 +237,9 @@ public final class CollectionFactory {
 	 * @param capacity the initial capacity
 	 * @return a new, empty map instance
 	 * @see #isApproximableMapType
-	 * @see java.util.EnumMap
-	 * @see java.util.TreeMap
-	 * @see java.util.LinkedHashMap
+	 * @see EnumMap
+	 * @see TreeMap
+	 * @see LinkedHashMap
 	 */
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static <K, V> Map<K, V> createApproximateMap(@Nullable Object map, int capacity) {
@@ -286,10 +286,10 @@ public final class CollectionFactory {
 	 * @param capacity the initial capacity
 	 * @return a new map instance
 	 * @since 4.1.3
-	 * @see java.util.LinkedHashMap
-	 * @see java.util.TreeMap
-	 * @see org.springframework.util.LinkedMultiValueMap
-	 * @see java.util.EnumMap
+	 * @see LinkedHashMap
+	 * @see TreeMap
+	 * @see LinkedMultiValueMap
+	 * @see EnumMap
 	 * @throws IllegalArgumentException if the supplied {@code mapType} is
 	 * {@code null}; or if the desired {@code mapType} is {@link EnumMap} and
 	 * the supplied {@code keyType} is not a subtype of {@link Enum}
@@ -329,7 +329,7 @@ public final class CollectionFactory {
 	}
 
 	/**
-	 * Create a variant of {@link java.util.Properties} that automatically adapts
+	 * Create a variant of {@link Properties} that automatically adapts
 	 * non-String values to String representations in {@link Properties#getProperty}.
 	 * <p>In addition, the returned {@code Properties} instance sorts properties
 	 * alphanumerically based on their keys.
@@ -351,7 +351,7 @@ public final class CollectionFactory {
 	}
 
 	/**
-	 * Create a variant of {@link java.util.Properties} that sorts properties
+	 * Create a variant of {@link Properties} that sorts properties
 	 * alphanumerically based on their keys.
 	 * <p>This can be useful when storing the {@link Properties} instance in a
 	 * properties file, since it allows such files to be generated in a repeatable
@@ -369,7 +369,7 @@ public final class CollectionFactory {
 	}
 
 	/**
-	 * Create a variant of {@link java.util.Properties} that sorts properties
+	 * Create a variant of {@link Properties} that sorts properties
 	 * alphanumerically based on their keys.
 	 * <p>This can be useful when storing the {@code Properties} instance in a
 	 * properties file, since it allows such files to be generated in a repeatable

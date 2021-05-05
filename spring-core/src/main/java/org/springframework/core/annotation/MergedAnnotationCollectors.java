@@ -102,7 +102,7 @@ public abstract class MergedAnnotationCollectors {
 	 * @param adaptations adaptations that should be applied to the annotation values
 	 * @return a {@link Collector} which collects and synthesizes the
 	 * annotations into a {@link LinkedMultiValueMap}
-	 * @see #toMultiValueMap(Function, MergedAnnotation.Adapt...)
+	 * @see #toMultiValueMap(Function, Adapt...)
 	 */
 	public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, MultiValueMap<String, Object>> toMultiValueMap(
 			Adapt... adaptations) {
@@ -120,7 +120,7 @@ public abstract class MergedAnnotationCollectors {
 	 * @param finisher the finisher function for the new {@link MultiValueMap}
 	 * @return a {@link Collector} which collects and synthesizes the
 	 * annotations into a {@link LinkedMultiValueMap}
-	 * @see #toMultiValueMap(MergedAnnotation.Adapt...)
+	 * @see #toMultiValueMap(Adapt...)
 	 */
 	public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, MultiValueMap<String, Object>> toMultiValueMap(
 			Function<MultiValueMap<String, Object>, MultiValueMap<String, Object>> finisher,

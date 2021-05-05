@@ -440,7 +440,7 @@ public class ReflectUtils {
 			list.addAll(OBJECT_METHODS);
 		}
 		else
-			list.addAll(java.util.Arrays.asList(type.getDeclaredMethods()));
+			list.addAll(Arrays.asList(type.getDeclaredMethods()));
 
 		Class superclass = type.getSuperclass();
 		if (superclass != null) {

@@ -829,7 +829,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
 
 
 	/**
-	 * Allows a task access to {@link ConcurrentReferenceHashMap.Segment} entries.
+	 * Allows a task access to {@link Segment} entries.
 	 */
 	private interface Entries<V> {
 

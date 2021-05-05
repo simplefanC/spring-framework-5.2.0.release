@@ -223,7 +223,7 @@ public class GenericConversionService implements ConfigurableConversionService {
 	/**
 	 * Template method to convert a {@code null} source.
 	 * <p>The default implementation returns {@code null} or the Java 8
-	 * {@link java.util.Optional#empty()} instance if the target type is
+	 * {@link Optional#empty()} instance if the target type is
 	 * {@code java.util.Optional}. Subclasses may override this to return
 	 * custom {@code null} objects for specific target types.
 	 * @param sourceType the source type to convert from

@@ -319,7 +319,7 @@ public class LinkedCaseInsensitiveMap<V> implements Map<String, V>, Serializable
 	 * @return {@code true} for removing it, {@code false} for keeping it
 	 * @see LinkedHashMap#removeEldestEntry
 	 */
-	protected boolean removeEldestEntry(Map.Entry<String, V> eldest) {
+	protected boolean removeEldestEntry(Entry<String, V> eldest) {
 		return false;
 	}
 
@@ -441,7 +441,7 @@ public class LinkedCaseInsensitiveMap<V> implements Map<String, V>, Serializable
 		@SuppressWarnings("unchecked")
 		public boolean remove(Object o) {
 			if (this.delegate.remove(o)) {
-				removeCaseInsensitiveKey(((Map.Entry<String, V>) o).getKey());
+				removeCaseInsensitiveKey(((Entry<String, V>) o).getKey());
 				return true;
 			}
 			return false;

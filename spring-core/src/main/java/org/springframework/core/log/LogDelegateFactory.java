@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Rossen Stoyanchev
  * @author Juergen Hoeller
  * @since 5.1
- * @see org.apache.commons.logging.LogFactory
+ * @see LogFactory
  */
 public final class LogDelegateFactory {
 

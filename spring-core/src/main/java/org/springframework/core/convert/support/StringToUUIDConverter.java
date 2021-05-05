@@ -22,7 +22,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.util.StringUtils;
 
 /**
- * Converts from a String to a {@link java.util.UUID}.
+ * Converts from a String to a {@link UUID}.
  *
  * @author Phillip Webb
  * @since 3.2

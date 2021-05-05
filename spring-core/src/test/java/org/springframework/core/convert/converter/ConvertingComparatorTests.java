@@ -98,7 +98,7 @@ class ConvertingComparatorTests {
 	@Test
 	void shouldGetMapEntryKeys() throws Exception {
 		ArrayList<Entry<String, Integer>> list = createReverseOrderMapEntryList();
-		Comparator<Map.Entry<String, Integer>> comparator = ConvertingComparator.mapEntryKeys(new ComparableComparator<String>());
+		Comparator<Entry<String, Integer>> comparator = ConvertingComparator.mapEntryKeys(new ComparableComparator<String>());
 		Collections.sort(list, comparator);
 		assertThat(list.get(0).getKey()).isEqualTo("a");
 	}
@@ -106,7 +106,7 @@ class ConvertingComparatorTests {
 	@Test
 	void shouldGetMapEntryValues() throws Exception {
 		ArrayList<Entry<String, Integer>> list = createReverseOrderMapEntryList();
-		Comparator<Map.Entry<String, Integer>> comparator = ConvertingComparator.mapEntryValues(new ComparableComparator<Integer>());
+		Comparator<Entry<String, Integer>> comparator = ConvertingComparator.mapEntryValues(new ComparableComparator<Integer>());
 		Collections.sort(list, comparator);
 		assertThat(list.get(0).getValue()).isEqualTo(1);
 	}

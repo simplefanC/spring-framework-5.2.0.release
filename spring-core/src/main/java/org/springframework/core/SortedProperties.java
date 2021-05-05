@@ -44,7 +44,7 @@ import org.springframework.lang.Nullable;
  *
  * @author Sam Brannen
  * @since 5.2
- * @see java.util.Properties
+ * @see Properties
  */
 @SuppressWarnings("serial")
 class SortedProperties extends Properties {

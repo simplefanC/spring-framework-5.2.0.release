@@ -127,7 +127,7 @@ class ReactiveAdapterRegistryTests {
 	void publisherToRxObservable() {
 		List<Integer> sequence = Arrays.asList(1, 2, 3);
 		Publisher<Integer> source = Flowable.fromIterable(sequence);
-		Object target = getAdapter(rx.Observable.class).fromPublisher(source);
+		Object target = getAdapter(Observable.class).fromPublisher(source);
 		boolean condition = target instanceof Observable;
 		assertThat(condition).isTrue();
 		assertThat(((Observable<?>) target).toList().toBlocking().first()).isEqualTo(sequence);
@@ -136,7 +136,7 @@ class ReactiveAdapterRegistryTests {
 	@Test
 	void publisherToRxSingle() {
 		Publisher<Integer> source = Flowable.fromArray(1);
-		Object target = getAdapter(rx.Single.class).fromPublisher(source);
+		Object target = getAdapter(Single.class).fromPublisher(source);
 		boolean condition = target instanceof Single;
 		assertThat(condition).isTrue();
 		assertThat(((Single<Integer>) target).toBlocking().value()).isEqualTo(Integer.valueOf(1));
@@ -145,7 +145,7 @@ class ReactiveAdapterRegistryTests {
 	@Test
 	void publisherToRxCompletable() {
 		Publisher<Integer> source = Flowable.fromArray(1, 2, 3);
-		Object target = getAdapter(rx.Completable.class).fromPublisher(source);
+		Object target = getAdapter(Completable.class).fromPublisher(source);
 		boolean condition = target instanceof Completable;
 		assertThat(condition).isTrue();
 		assertThat(((Completable) target).get()).isNull();
@@ -155,7 +155,7 @@ class ReactiveAdapterRegistryTests {
 	void publisherToReactivexFlowable() {
 		List<Integer> sequence = Arrays.asList(1, 2, 3);
 		Publisher<Integer> source = Flux.fromIterable(sequence);
-		Object target = getAdapter(io.reactivex.Flowable.class).fromPublisher(source);
+		Object target = getAdapter(Flowable.class).fromPublisher(source);
 		boolean condition = target instanceof Flowable;
 		assertThat(condition).isTrue();
 		assertThat(((Flowable<?>) target).toList().blockingGet()).isEqualTo(sequence);
@@ -192,8 +192,8 @@ class ReactiveAdapterRegistryTests {
 	@Test
 	void rxObservableToPublisher() {
 		List<Integer> sequence = Arrays.asList(1, 2, 3);
-		Object source = rx.Observable.from(sequence);
-		Object target = getAdapter(rx.Observable.class).toPublisher(source);
+		Object source = Observable.from(sequence);
+		Object target = getAdapter(Observable.class).toPublisher(source);
 		boolean condition = target instanceof Flux;
 		assertThat(condition).as("Expected Flux Publisher: " + target.getClass().getName()).isTrue();
 		assertThat(((Flux<Integer>) target).collectList().block(Duration.ofMillis(1000))).isEqualTo(sequence);
@@ -201,8 +201,8 @@ class ReactiveAdapterRegistryTests {
 
 	@Test
 	void rxSingleToPublisher() {
-		Object source = rx.Single.just(1);
-		Object target = getAdapter(rx.Single.class).toPublisher(source);
+		Object source = Single.just(1);
+		Object target = getAdapter(Single.class).toPublisher(source);
 		boolean condition = target instanceof Mono;
 		assertThat(condition).as("Expected Mono Publisher: " + target.getClass().getName()).isTrue();
 		assertThat(((Mono<Integer>) target).block(Duration.ofMillis(1000))).isEqualTo(Integer.valueOf(1));
@@ -210,8 +210,8 @@ class ReactiveAdapterRegistryTests {
 
 	@Test
 	void rxCompletableToPublisher() {
-		Object source = rx.Completable.complete();
-		Object target = getAdapter(rx.Completable.class).toPublisher(source);
+		Object source = Completable.complete();
+		Object target = getAdapter(Completable.class).toPublisher(source);
 		boolean condition = target instanceof Mono;
 		assertThat(condition).as("Expected Mono Publisher: " + target.getClass().getName()).isTrue();
 		((Mono<Void>) target).block(Duration.ofMillis(1000));
@@ -220,8 +220,8 @@ class ReactiveAdapterRegistryTests {
 	@Test
 	void reactivexFlowableToPublisher() {
 		List<Integer> sequence = Arrays.asList(1, 2, 3);
-		Object source = io.reactivex.Flowable.fromIterable(sequence);
-		Object target = getAdapter(io.reactivex.Flowable.class).toPublisher(source);
+		Object source = Flowable.fromIterable(sequence);
+		Object target = getAdapter(Flowable.class).toPublisher(source);
 		boolean condition = target instanceof Flux;
 		assertThat(condition).as("Expected Flux Publisher: " + target.getClass().getName()).isTrue();
 		assertThat(((Flux<Integer>) target).collectList().block(Duration.ofMillis(1000))).isEqualTo(sequence);

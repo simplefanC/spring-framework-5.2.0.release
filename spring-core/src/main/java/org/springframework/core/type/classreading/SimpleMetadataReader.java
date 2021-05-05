@@ -29,7 +29,7 @@ import org.springframework.lang.Nullable;
 
 /**
  * {@link MetadataReader} implementation based on an ASM
- * {@link org.springframework.asm.ClassReader}.
+ * {@link ClassReader}.
  *
  * @author Juergen Hoeller
  * @author Costin Leau

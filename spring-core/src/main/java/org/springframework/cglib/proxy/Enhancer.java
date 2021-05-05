@@ -118,7 +118,7 @@ public class Enhancer extends AbstractClassGenerator {
 	private static final String CONSTRUCTED_FIELD = "CGLIB$CONSTRUCTED";
 
 	/**
-	 * {@link org.springframework.cglib.core.AbstractClassGenerator.ClassLoaderData#generatedClasses} requires to keep cache key
+	 * {@link ClassLoaderData#generatedClasses} requires to keep cache key
 	 * in a good shape (the keys should be up and running if the proxy class is alive), and one of the cache keys is
 	 * {@link CallbackFilter}. That is why the generated class contains static field that keeps strong reference to
 	 * the {@link #filter}.
@@ -762,7 +762,7 @@ public class Enhancer extends AbstractClassGenerator {
 
 	/**
 	 * This method should not be called in regular flow.
-	 * Technically speaking {@link #wrapCachedClass(Class)} uses {@link Enhancer.EnhancerFactoryData} as a cache value,
+	 * Technically speaking {@link #wrapCachedClass(Class)} uses {@link EnhancerFactoryData} as a cache value,
 	 * and the latter enables faster instantiation than plain old reflection lookup and invoke.
 	 * This method is left intact for backward compatibility reasons: just in case it was ever used.
 	 * @param type class to instantiate

@@ -77,7 +77,7 @@ public class StandardAnnotationMetadata extends StandardClassMetadata implements
 	 * with ASM-based {@link AnnotationMetadata} implementations
 	 * @since 3.1.1
 	 * @deprecated since 5.2 in favor of the factory method {@link AnnotationMetadata#introspect(Class)}.
-	 * Use {@link MergedAnnotation#asMap(org.springframework.core.annotation.MergedAnnotation.Adapt...) MergedAnnotation.asMap}
+	 * Use {@link MergedAnnotation#asMap(MergedAnnotation.Adapt...) MergedAnnotation.asMap}
 	 * from {@link #getAnnotations()} rather than {@link #getAnnotationAttributes(String)}
 	 * if {@code nestedAnnotationsAsMap} is {@code false}
 	 */

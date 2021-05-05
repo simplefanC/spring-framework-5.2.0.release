@@ -21,7 +21,7 @@ import java.util.function.Supplier;
 import org.springframework.lang.Nullable;
 
 /**
- * Convenience utilities for {@link java.util.function.Supplier} handling.
+ * Convenience utilities for {@link Supplier} handling.
  *
  * @author Juergen Hoeller
  * @since 5.1

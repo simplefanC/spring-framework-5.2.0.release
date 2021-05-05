@@ -37,7 +37,7 @@ import org.springframework.util.ResourceUtils;
  * <p>This is the class resolved by {@link DefaultResourceLoader} for a "file:..."
  * URL location, allowing a downcast to {@link WritableResource} for it.
  *
- * <p>Alternatively, for direct construction from a {@link java.io.File} handle
+ * <p>Alternatively, for direct construction from a {@link File} handle
  * or NIO {@link java.nio.file.Path}, consider using {@link FileSystemResource}.
  *
  * @author Juergen Hoeller

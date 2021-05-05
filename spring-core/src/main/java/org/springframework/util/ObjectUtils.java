@@ -62,9 +62,9 @@ public abstract class ObjectUtils {
 	 * that is, neither a RuntimeException nor an Error.
 	 * @param ex the throwable to check
 	 * @return whether the throwable is a checked exception
-	 * @see java.lang.Exception
-	 * @see java.lang.RuntimeException
-	 * @see java.lang.Error
+	 * @see Exception
+	 * @see RuntimeException
+	 * @see Error
 	 */
 	public static boolean isCheckedException(Throwable ex) {
 		return !(ex instanceof RuntimeException || ex instanceof Error);
@@ -129,8 +129,8 @@ public abstract class ObjectUtils {
 	 * @see ObjectUtils#isEmpty(Object[])
 	 * @see StringUtils#hasLength(CharSequence)
 	 * @see StringUtils#isEmpty(Object)
-	 * @see CollectionUtils#isEmpty(java.util.Collection)
-	 * @see CollectionUtils#isEmpty(java.util.Map)
+	 * @see CollectionUtils#isEmpty(Collection)
+	 * @see CollectionUtils#isEmpty(Map)
 	 */
 	@SuppressWarnings("rawtypes")
 	public static boolean isEmpty(@Nullable Object obj) {
@@ -159,7 +159,7 @@ public abstract class ObjectUtils {
 	}
 
 	/**
-	 * Unwrap the given object which is potentially a {@link java.util.Optional}.
+	 * Unwrap the given object which is potentially a {@link Optional}.
 	 * @param obj the candidate object
 	 * @return either the value held within the {@code Optional}, {@code null}
 	 * if the {@code Optional} is empty, or simply the given object as-is
@@ -314,7 +314,7 @@ public abstract class ObjectUtils {
 	 * @param o2 second Object to compare
 	 * @return whether the given objects are equal
 	 * @see Object#equals(Object)
-	 * @see java.util.Arrays#equals
+	 * @see Arrays#equals
 	 */
 	public static boolean nullSafeEquals(@Nullable Object o1, @Nullable Object o2) {
 		if (o1 == o2) {
@@ -339,7 +339,7 @@ public abstract class ObjectUtils {
 	 * @param o2 second array to compare
 	 * @return whether the given objects are equal
 	 * @see #nullSafeEquals(Object, Object)
-	 * @see java.util.Arrays#equals
+	 * @see Arrays#equals
 	 */
 	private static boolean arrayEquals(Object o1, Object o2) {
 		if (o1 instanceof Object[] && o2 instanceof Object[]) {

@@ -38,7 +38,7 @@ import org.springframework.util.StringUtils;
  *
  * @author Juergen Hoeller
  * @since 28.12.2003
- * @see java.net.URL
+ * @see URL
  */
 public class UrlResource extends AbstractFileResolvingResource {
 
@@ -88,7 +88,7 @@ public class UrlResource extends AbstractFileResolvingResource {
 	 * <p>Note: The given path needs to be pre-encoded if necessary.
 	 * @param path a URL path
 	 * @throws MalformedURLException if the given URL path is not valid
-	 * @see java.net.URL#URL(String)
+	 * @see URL#URL(String)
 	 */
 	public UrlResource(String path) throws MalformedURLException {
 		Assert.notNull(path, "Path must not be null");
@@ -105,7 +105,7 @@ public class UrlResource extends AbstractFileResolvingResource {
 	 * @param location the location (e.g. the file path within that protocol);
 	 * also known as "scheme-specific part"
 	 * @throws MalformedURLException if the given URL specification is not valid
-	 * @see java.net.URI#URI(String, String, String)
+	 * @see URI#URI(String, String, String)
 	 */
 	public UrlResource(String protocol, String location) throws MalformedURLException  {
 		this(protocol, location, null);
@@ -121,7 +121,7 @@ public class UrlResource extends AbstractFileResolvingResource {
 	 * @param fragment the fragment within that location (e.g. anchor on an HTML page,
 	 * as following after a "#" separator)
 	 * @throws MalformedURLException if the given URL specification is not valid
-	 * @see java.net.URI#URI(String, String, String)
+	 * @see URI#URI(String, String, String)
 	 */
 	public UrlResource(String protocol, String location, @Nullable String fragment) throws MalformedURLException  {
 		try {
@@ -142,7 +142,7 @@ public class UrlResource extends AbstractFileResolvingResource {
 	 * @param originalUrl the original URL
 	 * @param originalPath the original URL path
 	 * @return the cleaned URL (possibly the original URL as-is)
-	 * @see org.springframework.util.StringUtils#cleanPath
+	 * @see StringUtils#cleanPath
 	 */
 	private URL getCleanedUrl(URL originalUrl, String originalPath) {
 		String cleanedPath = StringUtils.cleanPath(originalPath);
@@ -161,9 +161,9 @@ public class UrlResource extends AbstractFileResolvingResource {
 	 * This implementation opens an InputStream for the given URL.
 	 * <p>It sets the {@code useCaches} flag to {@code false},
 	 * mainly to avoid jar file locking on Windows.
-	 * @see java.net.URL#openConnection()
-	 * @see java.net.URLConnection#setUseCaches(boolean)
-	 * @see java.net.URLConnection#getInputStream()
+	 * @see URL#openConnection()
+	 * @see URLConnection#setUseCaches(boolean)
+	 * @see URLConnection#getInputStream()
 	 */
 	@Override
 	public InputStream getInputStream() throws IOException {
@@ -216,7 +216,7 @@ public class UrlResource extends AbstractFileResolvingResource {
 	/**
 	 * This implementation returns a File reference for the underlying URL/URI,
 	 * provided that it refers to a file in the file system.
-	 * @see org.springframework.util.ResourceUtils#getFile(java.net.URL, String)
+	 * @see ResourceUtils#getFile(URL, String)
 	 */
 	@Override
 	public File getFile() throws IOException {
@@ -244,7 +244,7 @@ public class UrlResource extends AbstractFileResolvingResource {
 	 * A leading slash will get dropped; a "#" symbol will get encoded.
 	 * @since 5.2
 	 * @see #createRelative(String)
-	 * @see java.net.URL#URL(java.net.URL, String)
+	 * @see URL#URL(URL, String)
 	 */
 	protected URL createRelativeURL(String relativePath) throws MalformedURLException {
 		if (relativePath.startsWith("/")) {
@@ -258,7 +258,7 @@ public class UrlResource extends AbstractFileResolvingResource {
 
 	/**
 	 * This implementation returns the name of the file that this URL refers to.
-	 * @see java.net.URL#getPath()
+	 * @see URL#getPath()
 	 */
 	@Override
 	public String getFilename() {
