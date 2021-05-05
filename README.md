@@ -106,6 +106,8 @@ public class App {
 
 1. 找不到符号 类InstrumentationSavingAgent
 
+![](https://gitee.com/cf_9909/image_bed/raw/master/images/20210505154946.png)
+
    首先找到这个类所在的项目（如InstrumentationSavingAgent类所在的项目为spring-instrument）；
    再看看out文件夹（idea默认编译文件为out）下面是不是有这个class
 
