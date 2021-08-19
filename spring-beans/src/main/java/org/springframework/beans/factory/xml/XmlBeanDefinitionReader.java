@@ -317,7 +317,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 		if (logger.isTraceEnabled()) {
 			logger.trace("Loading XML bean definitions from " + encodedResource);
 		}
-		//从本地线程变量中获取当前的正在加载的资源
+		//从本地线程变量中获取当前的正在加载的资源 使用ThreadLocal创建的变量
 		Set<EncodedResource> currentResources = this.resourcesCurrentlyBeingLoaded.get();
 		//如果本地线程变量中不存在正在加载的资源，那么将其添加进去
 		if (currentResources == null) {
@@ -401,7 +401,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 		try {
 			//创建Document对象，XML的文档对象，就是dom树
 			// 使用这个Document可以获取XML文件中的节点并且创建节点
-			// SAX XML
+			// SAX XML解析工具
 			Document doc = doLoadDocument(inputSource, resource);
 			//解析dom树，即解析出一个个属性，将其保存到BeanDefinition当中
 			//并向容器注册BeanDefinition

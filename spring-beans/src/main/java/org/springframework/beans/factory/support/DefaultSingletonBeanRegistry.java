@@ -113,7 +113,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	private final Map<String, Set<String>> containedBeanMap = new ConcurrentHashMap<>(16);
 
 	/** Map between dependent bean names: bean name to Set of dependent bean names. */
-	//dependentBeanMap(被依赖关系:key被value所依赖)
+	//依赖关系:value依赖于key
 	private final Map<String, Set<String>> dependentBeanMap = new ConcurrentHashMap<>(64);
 
 	/** Map between depending bean names: bean name to Set of bean names for the bean's dependencies. */
@@ -121,6 +121,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	private final Map<String, Set<String>> dependenciesForBeanMap = new ConcurrentHashMap<>(64);
 
 
+	//TODO 注册单例bean
 	@Override
 	public void registerSingleton(String beanName, Object singletonObject) throws IllegalStateException {
 		Assert.notNull(beanName, "Bean name must not be null");
@@ -427,8 +428,8 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 
 		synchronized (this.dependentBeanMap) {
 			// computeIfAbsent:若key对应的value为空，会将第二个参数的返回值存入并返回
-			//dependentBeanMap中存放着当前Bean被引用的Bean的集合
-			//比如当前需要实例化的是Bean的名字是userInfo,userInfo中有个Human类型的属性human，
+			// dependentBeanMap中存放着当前Bean被引用的Bean的集合
+			// 比如当前需要实例化的是Bean的名字是userInfo,userInfo中有个Human类型的属性human，
 			// 那么就有human被userInfo引用的关系 human=[userInfo]
 			Set<String> dependentBeans =
 					this.dependentBeanMap.computeIfAbsent(canonicalName, k -> new LinkedHashSet<>(8));

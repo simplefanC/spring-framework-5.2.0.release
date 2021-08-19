@@ -223,32 +223,43 @@ public abstract class AopUtils {
 	 */
 	public static boolean canApply(Pointcut pc, Class<?> targetClass, boolean hasIntroductions) {
 		Assert.notNull(pc, "Pointcut must not be null");
+		//对bean进行粗筛
 		if (!pc.getClassFilter().matches(targetClass)) {
 			return false;
 		}
-
+		//判断如果当前Advisor所指代的方法的切点表达式如果是对任意方法都放行,则直接返回
 		MethodMatcher methodMatcher = pc.getMethodMatcher();
 		if (methodMatcher == MethodMatcher.TRUE) {
 			// No need to iterate the methods if we're matching any method anyway...
 			return true;
 		}
-
+		//这里将MethodMatcher强转为IntroductionAwareMethodMatcher类型的原因在于,
+		//如果目标类不包含Introduction类型的Advisor ,那么使用
+		// IntroductionAwareMethodMatcher.matches(方法进行匹配判断时可以提升匹配的效率,
+		//其会判断目标bean中没有使用Introduction织入新的方法,则可以使用该方法进行静态匹配,从而提升效率
+		//因为Introduction类型的Advisor可以往目标类中织入新的方法,新的方法也可能是被AOP环绕的方法
+		// IntroductionAwareMethodMatcher的主要实现类是AspectJExpressionPointcut ,可以看看里面的实现
 		IntroductionAwareMethodMatcher introductionAwareMethodMatcher = null;
+		//判断匹配器是不是IntroductionAwareMethodMatcher
 		if (methodMatcher instanceof IntroductionAwareMethodMatcher) {
 			introductionAwareMethodMatcher = (IntroductionAwareMethodMatcher) methodMatcher;
 		}
 
 		Set<Class<?>> classes = new LinkedHashSet<>();
+		//判断当前class是不是代理的class对象
 		if (!Proxy.isProxyClass(targetClass)) {
 			classes.add(ClassUtils.getUserClass(targetClass));
 		}
+		//获取到targetClass所实现的接口的class对象,然后加入到集合中
 		classes.addAll(ClassUtils.getAllInterfacesForClassAsSet(targetClass));
 
 		for (Class<?> clazz : classes) {
 			Method[] methods = ReflectionUtils.getAllDeclaredMethods(clazz);
 			for (Method method : methods) {
+				//通过methodMatcher.matches来匹配方法
 				if (introductionAwareMethodMatcher != null ?
 						introductionAwareMethodMatcher.matches(method, targetClass, hasIntroductions) :
+						//通过方法匹配器进行匹配
 						methodMatcher.matches(method, targetClass)) {
 					return true;
 				}
@@ -281,14 +292,18 @@ public abstract class AopUtils {
 	 * @return whether the pointcut can apply on any method
 	 */
 	public static boolean canApply(Advisor advisor, Class<?> targetClass, boolean hasIntroductions) {
+		//判断是否是IntroductionAdvisor
 		if (advisor instanceof IntroductionAdvisor) {
 			return ((IntroductionAdvisor) advisor).getClassFilter().matches(targetClass);
 		}
+		//判断是否是PointcutAdvisor
 		else if (advisor instanceof PointcutAdvisor) {
+			//转为PointcutAdvisor类型
 			PointcutAdvisor pca = (PointcutAdvisor) advisor;
 			return canApply(pca.getPointcut(), targetClass, hasIntroductions);
 		}
 		else {
+			//如果advisor连pointcut表达式都没有的话,就证明它是匹配所有Bean的
 			// It doesn't have a pointcut so we assume it applies.
 			return true;
 		}
@@ -308,6 +323,7 @@ public abstract class AopUtils {
 		}
 		List<Advisor> eligibleAdvisors = new ArrayList<>();
 		for (Advisor candidate : candidateAdvisors) {
+			//判断Advisor对象是不是实现了IntroductionAdvisor
 			if (candidate instanceof IntroductionAdvisor && canApply(candidate, clazz)) {
 				eligibleAdvisors.add(candidate);
 			}

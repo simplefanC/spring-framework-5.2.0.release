@@ -1107,9 +1107,9 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 *     <lookup-method name="getUserBean" bean="teacher"/>
 	 *     <replaced-method name="changedMethod" replacer="replacer"/>
 	 * </bean>
-	 *<bean id="teacher" class="io.spring.test.Teacher" />
-	 *<bean id="student" class="io.spring.test.Student" />
-	 *<bean id="replacer" class="io.spring.test.Replacer" />
+	 * <bean id="teacher" class="io.spring.test.Teacher" />
+	 * <bean id="student" class="io.spring.test.Student" />
+	 * <bean id="replacer" class="io.spring.test.Replacer" />
 	 *
 	 * Validate and prepare the method overrides defined for this bean.
 	 * Checks for existence of a method with the specified name.

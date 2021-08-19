@@ -267,13 +267,13 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			// 如果是普通bean，直接返回，如果是FactoryBean，则返回他的getObject
 			bean = getObjectForBeanInstance(sharedInstance, name, beanName, null);
 		}
-		//若scope为prototype或者单例模式但是缓存中还不存在bean
+		//若scope为prototype 或者 singleton但是缓存中还不存在bean
 		else {
-
 			// Fail if we're already creating this bean instance:
 			// We're assumably within a circular reference.
 			//如果scope为prototype并且显示还在创建中，则基本是循环依赖的情况
 			//针对prototype的循环依赖，spring无解，直接抛出异常
+			//A->B->A 第1个A会被保存到prototypesCurrentlyInCreation 再创建第2个A时
 			if (isPrototypeCurrentlyInCreation(beanName)) {
 				throw new BeanCurrentlyInCreationException(beanName);
 			}
@@ -323,8 +323,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				// 获取当前Bean所有依赖Bean的名称
 				String[] dependsOn = mbd.getDependsOn();
 				// 如果当前Bean设置了dependsOn的属性
-				//depends-on用来指定Bean初始化及销毁时的顺序
-				//<bean id=a Class="com.imooc.A" depends-on="b" />
+				// depends-on用来指定Bean初始化及销毁时的顺序
+				// <bean id=a Class="com.imooc.A" depends-on="b" />
 				// <bean id=b Class="com.imooc.B" />
 				if (dependsOn != null) {
 					for (String dep : dependsOn) {
@@ -340,7 +340,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 						//缓存依赖调用，注意这里传入的key是被依赖的bean名称
 						registerDependentBean(dep, beanName);
 						try {
-							//递归调用getBean方法，注册Bean之间的依赖（如C需要晚于B初始化，而B需要晚于A初始化）
+							// 递归调用getBean方法，注册Bean之间的依赖（如C需要晚于B初始化，而B需要晚于A初始化）
 							// 初始化依赖的bean
 							getBean(dep);
 						}
@@ -1858,7 +1858,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			if (beanInstance instanceof NullBean) {
 				return beanInstance;
 			}
-			//如果name是以&开头的 但是不是FactoryBean，则直接抛出异常
+			//如果name是以&开头的 但不是FactoryBean，则直接抛出异常
 			if (!(beanInstance instanceof FactoryBean)) {
 				throw new BeanIsNotAFactoryException(beanName, beanInstance.getClass());
 			}
@@ -1881,18 +1881,19 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			mbd.isFactoryBean = true;
 		}
 		else {
-			//单例模式下，FactoryBean仅会创建一个Bean实例，
+			// 单例模式下，FactoryBean仅会创建一个Bean实例，
 			// 因此需要优先从缓存获取
 			object = getCachedObjectForFactoryBean(beanName);
 		}
 		if (object == null) {
-			//若缓存没有则尝试创建
+			// 若缓存没有则尝试创建
 			// Return bean instance from factory.
 			FactoryBean<?> factory = (FactoryBean<?>) beanInstance;
 			// Caches object obtained from FactoryBean if it is a singleton.
 			if (mbd == null && containsBeanDefinition(beanName)) {
 				mbd = getMergedLocalBeanDefinition(beanName);
 			}
+			// Synthetic表示该bean是spring容器内部生成的bean 不允许第三方用户改动
 			boolean synthetic = (mbd != null && mbd.isSynthetic());
 			object = getObjectFromFactoryBean(factory, beanName, !synthetic);
 		}

@@ -124,6 +124,32 @@ public class App {
 
 ![image-20210505143804502](https://gitee.com/cf_9909/image_bed/raw/master/images/image-20210505143804502.png)
 
+3. 找不到符号 类AnnotationCacheAspect
+
+   （1）下载安装AspectJ https://www.eclipse.org/aspectj/downloads.php
+
+   选择下载aspectj-1.9.4.jar
+
+   CMD执行：java -jar aspectj-1.9.4.jar安装aspectj
+
+   ![image-20210818153602748](https://gitee.com/cf_9909/image_bed/raw/master/images/image-20210818153602748.png)
+
+   （2）将编译器改为 Ajc
+
+   设置Ajc的安装目录，选择到aspectjtools.jar
+
+   将Delegate to Javac选项打钩，这个代理设置的作用只对指定的项目进行Ajc编译，其他的项目还是用默认的javac编译器编译
+
+   ![image-20210818155053264](https://gitee.com/cf_9909/image_bed/raw/master/images/image-20210818155053264.png)
+
+   （3）指定需要使用Ajc编译的项目
+
+   分别为`spring-aop`及`spring-aspects`添加`Facets`属性。
+
+   点击File --> Project Structure --> Facets，选择`spring-aop.main`，点击OK
+
+   点击File --> Project Structure --> Facets，选择`spring-aspects.main`，点击OK
+
 
 
 参考：
@@ -132,3 +158,4 @@ public class App {
 2. https://github.com/spring-projects/spring-framework/blob/main/import-into-idea.md
 3. https://blog.csdn.net/java_lyvee/article/details/107300648
 4. https://blog.csdn.net/zjssoul/article/details/110939030
+5. https://segmentfault.com/a/1190000023088100

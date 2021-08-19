@@ -90,6 +90,7 @@ public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 	 * @throws BeansException in case of errors
 	 * @see #postProcessBeforeInstantiation
 	 */
+	//在对象实例化完毕执行populateBean之前如果返回false则spring不再对对应的bean实例进行自动依赖注入
 	default boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
 		return true;
 	}
@@ -112,6 +113,8 @@ public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 	 * @since 5.1
 	 * @see #postProcessPropertyValues
 	 */
+	//这里是在spring处理完默认的成员属性,应用到指定的bean之前进行回调,可以用来检查和修改属性
+	//@Autowired. @Resource等就是根据这个回调来实现最终注入依赖的属性的。
 	@Nullable
 	default PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName)
 			throws BeansException {

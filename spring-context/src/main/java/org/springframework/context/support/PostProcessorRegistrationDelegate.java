@@ -54,13 +54,17 @@ final class PostProcessorRegistrationDelegate {
 	/**
 	 * 调用BeanFactoryPostProcessor
 	 * 主要是分情况处理不同类型的BeanFactoryPostProcessors。
-	 * BeanFacotryPostProcessors主要分为两类，一类是BeanDefinitionRegistry的BeanFactoryPostProcessor，另外一类是常规的BeanFactoryPostProcessor。
+	 * BeanFacotryPostProcessors主要分为两类，一类是BeanDefinitionRegistryPostProcessor的BeanFactoryPostProcessor，另外一类是常规的BeanFactoryPostProcessor。
 	 * 优先处理前者。同时，这两种后置处理器又被分为从参数里传入和从容器里获取的，最终要将从参数里获取的和从容器里获取的合并在一起。
-	 * 合并的时候又分为实现了PriorityOrder和普通Order以及没有实现这两个接口的，实现了PriorityOrdered的先执行，
+	 *
+	 * 合并的时候又分为实现了PriorityOrder和普通Order以及没有实现这两个接口的，实现了PriorityOrdered的先执行
 	 * 同时是按照PriorityOrdered顺序执行的，其次再到Order，按照Order执行，最后才是没实现这两个接口的，
+	 *
 	 * 先执行完BeanDefinitionRegistryPostProcessor的invokeBeanDefinitionRegistryPostProcessors方法，
-	 * 再对BeanDefinitionRegistryPostProcessor执行invokeBeanFactoryPostProcessors方法，
+	 * 再对BeanDefinitionRegistryPostProcessor执行invokeBeanFactoryPostProcessors方法
+	 *
 	 * 之后再对常规的BeanFacotryPostProcessors执行invokeBeanFactoryPostProcessors方法
+	 *
 	 * @参数 beanFactory 应用上下文的 BeanFactory 实例
 	 * @参数 beanFactoryPostProcessors 应用上下文指定要执行的 BeanFactoryPostProcessor
 	 **/

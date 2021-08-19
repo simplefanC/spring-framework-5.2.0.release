@@ -509,8 +509,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		try {
 			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
-			//如果Bean配置了初始化前和初始化后的处理器，则试图返回一个需要创建Bean的代理对象
-			//resolveBeforeInstantiation只是针对有自定义的targetsource，
+			// 如果Bean配置了初始化前和初始化后的处理器，则试图返回一个需要创建Bean的代理对象
+			// resolveBeforeInstantiation只是针对有自定义的targetsource，
 			// 因为自定义的targetsource不是spring的bean那么肯定不需要进行后续的一系列的实例化,初始化。
 			// 所以可以在resolveBeforeInstantiation直接进行proxy
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
@@ -621,7 +621,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		//这个exposedObject在初始化完成之后返回作为依赖注入完成后的Bean
 		Object exposedObject = bean;
 		try {
-			//填充bean实例的属性
+			//填充bean实例的属性 依赖注入
 			populateBean(beanName, mbd, instanceWrapper);
 
 			//初始化bean，过程如下：
@@ -1008,6 +1008,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 * 当你调用Object earlySingletonReference = getSingleton(beanName, false);时候就会触发，
 	 * 其实还有一个地方exposedObject = initializeBean(beanName, exposedObject, mbd);
 	 * 也会触发导致返回一个代理对象
+	 *
 	 * Obtain a reference for early access to the specified bean,
 	 * typically for the purpose of resolving a circular reference.
 	 * @param beanName the name of the bean (for error handling purposes)
@@ -1239,7 +1240,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		if (instanceSupplier != null) {
 			return obtainFromSupplier(instanceSupplier, beanName);
 		}
-
+		//如果工厂方法不为空,则使用工厂方法初始化策略
 		if (mbd.getFactoryMethodName() != null) {
 			return instantiateUsingFactoryMethod(beanName, mbd, args);
 		}
@@ -1256,10 +1257,12 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			}
 		}
 		if (resolved) {
+			// 自动注入,调用构造函数自动注入
 			if (autowireNecessary) {
 				return autowireConstructor(beanName, mbd, null, null);
 			}
 			else {
+				// 使用默认构造函数构造
 				return instantiateBean(beanName, mbd);
 			}
 		}
@@ -1477,7 +1480,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// 提供属性的读写操作实现，同时可以通过调用构造函数实现深拷贝
 		//获取BeanDefinition里面为Bean设置上的属性值
 		PropertyValues pvs = (mbd.hasPropertyValues() ? mbd.getPropertyValues() : null);
-		// 根据Bean配置的依赖注入方式完成注入，默认是0，即不走以下逻辑，所有的依赖注入都需要在xml文件中有显式的配置
+		// 根据Bean配置的依赖注入方式完成注入，默认是0，即不走以下逻辑(在applyMergedBeanDefinitionPostProcessors完成)，所有的依赖注入都需要在xml文件中有显式的配置
 		// 如果设置了相关的依赖装配方式，会遍历Bean中的属性，根据类型或名称来完成相应注入，无需额外配置
 		int resolvedAutowireMode = mbd.getResolvedAutowireMode();
 		if (resolvedAutowireMode == AUTOWIRE_BY_NAME || resolvedAutowireMode == AUTOWIRE_BY_TYPE) {
@@ -1933,10 +1936,12 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		Object wrappedBean = bean;
 		if (mbd == null || !mbd.isSynthetic()) {
+			//初始化前
 			wrappedBean = applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
 		}
 
 		try {
+			//初始化
 			invokeInitMethods(beanName, wrappedBean, mbd);
 		}
 		catch (Throwable ex) {
@@ -1945,6 +1950,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 					beanName, "Invocation of init method failed", ex);
 		}
 		if (mbd == null || !mbd.isSynthetic()) {
+			//初始化后 （若AOP 返回代理对象）
 			wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
 		}
 
@@ -2001,6 +2007,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 				}
 			}
 			else {
+				//调afterPropertiesSet方法
 				((InitializingBean) bean).afterPropertiesSet();
 			}
 		}

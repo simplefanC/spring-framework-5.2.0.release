@@ -149,11 +149,11 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 				}
 			}
 		}
-		//在解析xml之前做的准备工作，其实什么也没做
+		//钩子方法 在解析xml之前做的准备工作，其实什么也没做
 		preProcessXml(root);
 		//调用这个方法，解析
 		parseBeanDefinitions(root, this.delegate);
-		//后续处理的
+		//钩子方法 后续处理的
 		postProcessXml(root);
 
 		this.delegate = parent;
@@ -201,21 +201,21 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 			delegate.parseCustomElement(root);
 		}
 	}
-
+	//不同的标签采用不同的处理逻辑
 	private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
 		//如果元素节点是<Import>导入元素，进行导入解析
 		//<import resource="classpath:applicationContext-datasource.xml" />
 		if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
-			importBeanDefinitionResource(ele);
+			importBeanDefinitionResource(ele);//fireImportProcessed
 		}
 		//如果元素节点是<Alias>别名元素，进行别名解析
 		else if (delegate.nodeNameEquals(ele, ALIAS_ELEMENT)) {
-			processAliasRegistration(ele);
+			processAliasRegistration(ele);//fireAliasRegistered
 		}
 		//元素节点既不是导入元素，也不是别名元素，即普通的<Bean>元素，
 		//按照Spring的Bean规则解析元素
 		else if (delegate.nodeNameEquals(ele, BEAN_ELEMENT)) {
-			processBeanDefinition(ele, delegate);
+			processBeanDefinition(ele, delegate);//fireComponentRegistered
 		}
 		else if (delegate.nodeNameEquals(ele, NESTED_BEANS_ELEMENT)) {
 			// recurse
