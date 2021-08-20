@@ -112,7 +112,10 @@ public class HandlerMethodArgumentResolverComposite implements HandlerMethodArgu
 	@Nullable
 	public Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception {
-
+		//首先获取参数解析器，这里获取的逻辑是首先从argumentResolverCache缓存中
+		//获取该MethodParameter匹配的HandlerMethodArgumentResolver.
+		//如果为空，遍历初始化定义的那26个解析器实例,
+		//查找匹配的HandLerMethodArgumentResolver,然后添加至argumentResolverCache缓存中
 		HandlerMethodArgumentResolver resolver = getArgumentResolver(parameter);
 		if (resolver == null) {
 			throw new IllegalArgumentException("Unsupported parameter type [" +

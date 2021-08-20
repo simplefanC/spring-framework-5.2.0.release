@@ -500,14 +500,27 @@ public class DispatcherServlet extends FrameworkServlet {
 	 * <p>May be overridden in subclasses in order to initialize further strategy objects.
 	 */
 	protected void initStrategies(ApplicationContext context) {
+		//初始化文件.上传处理器
 		initMultipartResolver(context);
+		//初始化国际化配置
 		initLocaleResolver(context);
+		//初始化主题处理器
 		initThemeResolver(context);
+		//初始化HanLderMapping
 		initHandlerMappings(context);
+		//初始化HandlerAdapter
+		//HandlerAdapter用来调用具体的方法对用户发来的请求来进行处理
 		initHandlerAdapters(context);
+		//初始化异常处理器,
+		// HandlerExceptionResolver 是用来对请求处理过程中产生的异常进行处理
 		initHandlerExceptionResolvers(context);
+		//RequestToViewNameTranslator用于在视图路径为空的时候，自动解析请求
+		//去获取ViewName
 		initRequestToViewNameTranslator(context);
+		//初始化视图处理器
+		//ViewResolvers将逻辑视图转成view对象
 		initViewResolvers(context);
+		//FLashMapManager用于存储、获取以及管理FLashMap实例
 		initFlashMapManager(context);
 	}
 
@@ -592,19 +605,26 @@ public class DispatcherServlet extends FrameworkServlet {
 	 */
 	private void initHandlerMappings(ApplicationContext context) {
 		this.handlerMappings = null;
-
+		//是否检查所有的HandLersMapping实现类并载入，默认为true
+		//<init-param>
+		//	<param-name>detectALLHandLerMappings</param-name>
+		//	<param-value>false</param-value>
+		//</init-param>
 		if (this.detectAllHandlerMappings) {
 			// Find all HandlerMappings in the ApplicationContext, including ancestor contexts.
+			//寻找IOC容器中HandLerMapping类型的Bean
 			Map<String, HandlerMapping> matchingBeans =
 					BeanFactoryUtils.beansOfTypeIncludingAncestors(context, HandlerMapping.class, true, false);
 			if (!matchingBeans.isEmpty()) {
 				this.handlerMappings = new ArrayList<>(matchingBeans.values());
 				// We keep HandlerMappings in sorted order.
+				//对找到的HandLerMapping类型的Bean列表进行排序
 				AnnotationAwareOrderComparator.sort(this.handlerMappings);
 			}
 		}
 		else {
 			try {
+				//从容器里获取beanName为handLerMapping的Bean
 				HandlerMapping hm = context.getBean(HANDLER_MAPPING_BEAN_NAME, HandlerMapping.class);
 				this.handlerMappings = Collections.singletonList(hm);
 			}
@@ -1009,20 +1029,25 @@ public class DispatcherServlet extends FrameworkServlet {
 			Exception dispatchException = null;
 
 			try {
+				//检查是否存在文件上传
 				processedRequest = checkMultipart(request);
 				multipartRequestParsed = (processedRequest != request);
 
 				// Determine handler for the current request.
+				//根据当前request获取handler,
+				// handler中包含了请求url,以及对应的controller以及controller中的方法
 				mappedHandler = getHandler(processedRequest);
 				if (mappedHandler == null) {
 					noHandlerFound(processedRequest, response);
 					return;
 				}
 
+				//通过handler获取对应的适配器, adapter负责完成参数解析
 				// Determine handler adapter for the current request.
 				HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());
 
 				// Process last-modified header, if supported by the handler.
+				//处理GET、HEAD请求的Last-modified
 				String method = request.getMethod();
 				boolean isGet = "GET".equals(method);
 				if (isGet || "HEAD".equals(method)) {
@@ -1031,19 +1056,21 @@ public class DispatcherServlet extends FrameworkServlet {
 						return;
 					}
 				}
-
+				//遍历所有定义的interceptor, 执行preHandle 方法
 				if (!mappedHandler.applyPreHandle(processedRequest, response)) {
 					return;
 				}
 
 				// Actually invoke the handler.
+				//调用目标Controller中的方法
 				mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
 
 				if (asyncManager.isConcurrentHandlingStarted()) {
 					return;
 				}
-
+				//处理成默认视图名，也就是添加前缀和后缀等
 				applyDefaultViewName(processedRequest, mv);
+				//拦截器postHandLe方法进行处理
 				mappedHandler.applyPostHandle(processedRequest, response, mv);
 			}
 			catch (Exception ex) {
@@ -1054,6 +1081,7 @@ public class DispatcherServlet extends FrameworkServlet {
 				// making them available for @ExceptionHandler methods and other scenarios.
 				dispatchException = new NestedServletException("Handler dispatch failed", err);
 			}
+			//处理最后的结果，渲染之类的逻辑都在这里
 			processDispatchResult(processedRequest, response, mappedHandler, mv, dispatchException);
 		}
 		catch (Exception ex) {
@@ -1115,6 +1143,7 @@ public class DispatcherServlet extends FrameworkServlet {
 
 		// Did the handler return a view to render?
 		if (mv != null && !mv.wasCleared()) {
+			//视图的渲染
 			render(mv, request, response);
 			if (errorView) {
 				WebUtils.clearErrorRequestAttributes(request);
@@ -1265,6 +1294,7 @@ public class DispatcherServlet extends FrameworkServlet {
 	 * @throws ServletException if no HandlerAdapter can be found for the handler. This is a fatal error.
 	 */
 	protected HandlerAdapter getHandlerAdapter(Object handler) throws ServletException {
+		//遍历所有的HandlerAdapter, 找到和当前Handler匹配的HandlerAdapter实例
 		if (this.handlerAdapters != null) {
 			for (HandlerAdapter adapter : this.handlerAdapters) {
 				if (adapter.supports(handler)) {
